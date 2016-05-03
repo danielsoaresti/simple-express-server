@@ -6,7 +6,7 @@ var app = express();
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
-  //res.header("Access-Control-Allow-Methods", "POST, GET");
+  res.header("Access-Control-Allow-Methods", "POST, GET");
   next();
 });
 
@@ -25,5 +25,12 @@ var gfs = [
  app.get('/gfs', function(req, res){
     res.send(gfs); 
  });
+ 
+ app.post('/gfs', function(req, res) {
+    var gf = req.body;
+    console.log(req.body);
+    gfs.push(gf);
+    res.status(200).send("Successfully posted gfs");
+});
  
  app.listen(6060);
